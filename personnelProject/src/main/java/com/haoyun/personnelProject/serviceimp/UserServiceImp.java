@@ -92,10 +92,7 @@ public class UserServiceImp implements UserService{
 	public boolean findUserByToken(String token) {
 		Map<String,String> map=new HashMap<>();
 		map.put("userToken", token);
-		if(userDao.findUserByToken(map)!=null) {
-			return true;
-		}
-		return false;
+		return userDao.findUserByToken(map) != null;
 	}
 
 }
