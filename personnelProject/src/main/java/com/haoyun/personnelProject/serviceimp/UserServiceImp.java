@@ -42,7 +42,7 @@ public class UserServiceImp implements UserService{
 	@Override
 	public String addUser(Map<String,String> map) {
 		String id=UUID.randomUUID().toString().replaceAll("-","");
-		String name=map.get("name");
+		String name=map.get("userName");
 		String fullName=map.get("fullName");
 		String passWord=map.get("passWord");
 		String phone=map.get("phone");

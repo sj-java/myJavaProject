@@ -18,8 +18,8 @@ import com.haoyun.personnelProject.util.ResultType;
 import net.sf.json.JSONObject;
 
 @RestController
-@RequestMapping("/personnal")
-public class SystemController {
+@RequestMapping("/user")
+public class UserController {
 	
 	@Autowired
 	private UserService userService;
@@ -30,8 +30,8 @@ public class SystemController {
 	 * @return
 	 */
 	@RequestMapping("userlogon")
-	public Result userlogon(@RequestParam("userName")String userName,
-			@RequestParam("passWord")String passWord){
+	public Result userlogon(@RequestParam(value="userName",required=true)String userName,
+			@RequestParam(value="passWord",required=true)String passWord){
 		
 		UserBean userBean=userService.findUserByNC(userName, passWord);
 		if(userBean != null) {
@@ -48,13 +48,13 @@ public class SystemController {
 	 * @return
 	 */
 	@RequestMapping("logonOut")
-	public ResponseEntity<Object> logonOut(@RequestParam("userToken")String token){
+	public Result logonOut(@RequestParam(value="userToken",required=true)String userToken){
 		
 		try {
-			userService.updateUserByT(token);
-			return new ResponseEntity<Object>("注销成功", HttpStatus.OK);
+			userService.updateUserByT(userToken);
+			return Result.resultSuccess("退出登录成功");
 		} catch (Exception e) {
-			return new ResponseEntity<Object>("注销失败", HttpStatus.NOT_FOUND);
+			return Result.resultError("退出登录异常");
 		}
 	}
 	
@@ -65,11 +65,17 @@ public class SystemController {
 	 * @return
 	 */
 	@RequestMapping("addUser")
-	public Result addUser(@RequestParam("userBean")String userBean){
+	public Result addUser(@RequestParam(value="userName",required=true)String userName,
+			@RequestParam(value="fullName",required=true)String fullName,
+			@RequestParam(value="passWord",required=true)String passWord,
+			@RequestParam(value="phone",required=false)String phone){
 		
-		JSONObject OBJ=JSONObject.fromObject(userBean);
+		
 		Map<String,String> map=new HashMap<String,String>();	
-		map=(Map)OBJ;
+		map.put("userName", userName);
+		map.put("fullName", fullName);
+		map.put("passWord", passWord);
+		map.put("phone", phone);
 		String code=userService.addUser(map);
 		if(code==ResultType.ADD_SUCCESS) {
 			return Result.resultSuccess(ResultType.ADD_SUCCESS);

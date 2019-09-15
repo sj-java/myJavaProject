@@ -112,6 +112,6 @@
   </update>
   <!-- 推出登录 -->
   <update id="updateUserCancel" parameterType="String">
-  	update user u set u.userToken='' where u.userToken=#{userToken}
+  	update user u set u.userToken=null where u.userToken=#{userToken}
   </update>
 </mapper>

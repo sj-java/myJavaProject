@@ -10,8 +10,8 @@ public static final String ERROE = "程序异常";
 	public static final String ADD_SUCCESS = "新增成功";
 	public static final String ADD_FAULT = "新增失败";
 	
-	public static final String SAVE_SUCCESS = "保存成功";
-	public static final String SAVE_FAULT = "保存失败";
+	public static final String UPDATE_SUCCESS = "编辑成功";
+	public static final String UPDATE_FAULT = "编辑失败";
 	
 	public static final String REMOVE_SUCCESS = "删除成功";
 	public static final String REMOVE_FAULT = "删除失败";
@@ -35,5 +35,9 @@ public static final String ERROE = "程序异常";
 	
 	public static final String OPERATION_SUCCESS="操作成功";
 	public static final String OPERATION_FAULT="操作失败";
+	
+
+	public static final String UPLOAD_SUCCESS="文件上传成功";
+	public static final String UPLOAD_FAULT="文件上传失败";
 
 }

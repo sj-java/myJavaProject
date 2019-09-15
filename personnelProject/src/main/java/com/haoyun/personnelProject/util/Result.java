@@ -20,8 +20,11 @@ public class Result implements Serializable {
 	
 	private int resultCode;
 	
-	
-	//返回成功结果
+	/**
+	 * 返回成功结果
+	 * @param data
+	 * @return
+	 */
 	public static  Result resultSuccess(Object data) {
 		Result result = new Result();
 		result.data = data;
@@ -30,12 +33,28 @@ public class Result implements Serializable {
 		return result;
 	}
  
-	//返回失败
+	/**
+	 * 返回失败结果
+	 * @param data
+	 * @return
+	 */
 	public static  Result resultError(Object data) {
 		Result result = new Result();
 		result.data = data;
 		result.message = ResultStatus.FAIL.getMessage();
 		result.resultCode=ResultStatus.FAIL.getCode();
+		return result;
+	}
+	/**
+	 * 返回自定义结果
+	 * @param data
+	 * @return
+	 */
+	public static  Result resultMsg(Object data,String msg) {
+		Result result = new Result();
+		result.data = data;
+		result.message = msg;
+		result.resultCode=ResultStatus.SUCCESS.getCode();
 		return result;
 	}
 

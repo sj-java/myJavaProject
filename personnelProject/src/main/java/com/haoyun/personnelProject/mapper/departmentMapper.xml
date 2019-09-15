@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haoyun.personnelProject.dao.DepartmentDao">
+<resultMap id="departmentList" type="com.haoyun.personnelProject.bean.DepartmentBean" >
+    <id column="id" property="id"  />
+    <result column="departmentName" property="departmentName" />
+    <result column="departmentCode" property="departmentCode" />
+    <result column="departmentRank" property="departmentRank" />
+    <result column="departmentDescribe" property="departmentDescribe" />
+    <result column="fatherDepartmentId" property="fatherDepartmentId" />
+    <result column="departmentState" property="departmentState" />
+  </resultMap>
+  <insert id="addDepartment" parameterType="com.haoyun.personnelProject.bean.DepartmentBean">
+  	insert into department(
+  		id,
+  		departmentName,
+  		departmentCode,
+  		departmentRank,
+  		departmentDescribe,
+  		fatherDepartmentId,
+  		departmentState
+  		
+  	) values(
+  		#{id},
+  		#{departmentName},
+  		#{departmentCode},
+  		#{departmentRank},
+  		#{departmentDescribe},	
+  		#{fatherDepartmentId},	
+  		#{departmentState}	
+  	)
+  </insert>
+   <select id="findDepartmentByCon" resultMap="departmentList" parameterType="java.util.Map">
+  		select 
+  			id,
+  			departmentName,
+  			departmentCode,
+  			departmentRank,
+  			departmentDescribe,
+  			fatherDepartmentId,
+  			departmentState
+  		from department d
+  		<where>
+  			<if test="departmentId != null and departmentId !=''">
+    			d.id = #{departmentId}
+  			</if> 
+  			<if test="departmentName != null and departmentName !=''">
+    			d.departmentName = #{departmentName}
+  			</if> 
+  			<if test="departmentCode != null and departmentCode !=''">
+    			and d.departmentCode = #{departmentCode}
+  			</if>
+  			<if test="departmentState != null and departmentState !=''">
+    			and d.departmentState = #{departmentState}
+  			</if>
+  		</where>
+  </select>
+   <update id="updateDepartmentByCon" parameterType="java.util.Map">
+  	update department d
+  	<set>
+  		<if test="departmentState != null and departmentState !=''">
+    			d.departmentState = #{departmentState}
+  		</if> 
+  	</set>
+  	<where>
+  		<if test="departmentId != null and departmentId !=''">
+    			d.id = #{departmentId}
+  		</if> 
+  	</where>
+  </update>
+</mapper>

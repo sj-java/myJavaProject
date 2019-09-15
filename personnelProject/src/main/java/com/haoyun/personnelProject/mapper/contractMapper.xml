@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haoyun.personnelProject.dao.ContractDao">
+	<resultMap id="contractList" type="com.haoyun.personnelProject.bean.ContractBean" >
+    <id column="id" property="id"  />
+    <result column="personnelId" property="personnelId" />
+    <result column="contractName" property="contractName" />
+    <result column="contractCode" property="contractCode" />
+    <result column="signDate" property="signDate" />
+    <result column="isLongContract" property="isLongContract" />
+    <result column="expireDate" property="expireDate" />
+    <result column="remark" property="remark" />
+  </resultMap>
+  
+  <select id="findContractByCon" resultMap="contractList" parameterType="java.util.Map">
+  	select * from contract c
+ 	<where>
+ 		<if test="personnelId != null and personnelId !=''">
+    			c.personnelId = #{personnelId}
+  		</if> 
+ 	</where>
+  </select>
+  
+  <insert id="addContract" parameterType="com.haoyun.personnelProject.bean.ContractBean">
+  	  	insert into contract(
+	  		id,
+	  		personnelId,
+	  		contractName,
+	  		contractCode,
+	  		signDate,
+	  		isLongContract,
+	  		expireDate,
+	  		remark
+	  	) values(
+	  		#{id},
+	  		#{personnelId},
+	  		#{contractName},
+	  		#{contractCode},
+	  		#{signDate},	
+	  		#{isLongContract},	
+	  		#{expireDate},
+	  		#{remark}		
+	  	)
+  </insert>
+  <update id="updateContractByCon" parameterType="java.util.Map">
+  	update contract c
+  	<set>
+  		<if test="expireDate != null and expireDate !=''">
+    			c.expireDate = #{expireDate},
+  		</if> 
+  		<if test="isLongContract != null and isLongContract !=''">
+    			c.isLongContract = #{isLongContract},
+  		</if> 
+  	</set>
+  	<where>
+  		<if test="id != null and id !=''">
+    			c.id = #{id}
+  		</if> 
+  	</where>
+  </update>
+</mapper>

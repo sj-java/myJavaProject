@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haoyun.personnelProject.dao.AnnexDao">
+	<resultMap id="annexList" type="com.haoyun.personnelProject.bean.AnnexBean" >
+    <id column="id" property="id"  />
+    <result column="belongId" property="belongId" />
+    <result column="annexName" property="annexName" />
+    <result column="lastName" property="lastName" />
+    <result column="annexUrl" property="annexUrl" />
+    <result column="uploadDate" property="uploadDate" />
+  </resultMap>
+  <select id="findAnnexBean" resultMap="annexList">
+  	select * from annex a
+  	<where>
+  		<if test="id != null and id !=''">
+    			a.id = #{id}
+  		</if> 
+  	</where>
+  </select>
+  
+  <insert id="addAnnexBean" parameterType="com.haoyun.personnelProject.bean.AnnexBean">
+  		insert into annex(
+	  		id,
+	  		belongId,
+	  		annexName,
+	  		lastName,
+	  		annexUrl,
+	  		uploadDate
+  		)values(
+  			#{id},
+  			#{belongId},
+  			#{annexName},
+  			#{lastName},
+  			#{annexUrl},
+  			#{uploadDate}
+  		)
+  		
+  </insert>
+  <delete id="deleteAnnexBean" parameterType="java.lang.String">
+  		delete from  annex where  annex.id=#{id}
+  </delete>
+</mapper>

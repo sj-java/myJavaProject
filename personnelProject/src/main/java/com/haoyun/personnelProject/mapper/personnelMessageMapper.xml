@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haoyun.personnelProject.dao.PersonnelMessageDao">
+
+	<resultMap id="personnelMessageList" type="com.haoyun.personnelProject.bean.PersonnelMessageBean" >
+	    <id column="personnelID" property="id"  />
+	    <result column="personnelName" property="personnelName" />
+	    <result column="personnelSex" property="personnelSex" />
+	    <result column="nation" property="nation" />
+	    <result column="nativePlace" property="nativePlace" />
+	    <result column="IDCard" property="IDCard" />
+	    <result column="birthPlace" property="birthPlace" />
+	    <result column="maritalStatus" property="maritalStatus" />
+	    <result column="healthState" property="healthState" />
+	    <result column="workUnit" property="workUnit" />
+	    <result column="departmentCode" property="departmentCode" />
+	    <result column="jobName" property="jobName" />
+	    <result column="jobType" property="jobType" />
+	    <result column="personnelType" property="personnelType" />
+	    <result column="onTheJobState" property="onTheJobState" />
+	    <result column="entryDate" property="entryDate" />
+	    <result column="leaveDate" property="leaveDate" />
+	    <result column="politicsStatus" property="politicsStatus" />
+	    <result column="startWorkTime" property="startWorkTime" />
+	    <result column="fullTimeAcademic" property="fullTimeAcademic" />
+	    <result column="fullTimeDegree" property="fullTimeDegree" />
+	    <result column="fullTimeSchool" property="fullTimeSchool" />
+	    <result column="fullTimeMajor" property="fullTimeMajor" />
+	    <result column="inServiceEducationAcademic" property="inServiceEducationAcademic" />
+	    <result column="inServiceEducationDegree" property="inServiceEducationDegree" />
+	    <result column="inServiceEducationSchool" property="inServiceEducationSchool" />
+	    <result column="inServiceEducationMajor" property="inServiceEducationMajor" />
+	    <result column="joinCommunistPartyTime" property="joinCommunistPartyTime" />
+	    <result column="joinLeagueMemberTime" property="joinLeagueMemberTime" />
+	    <result column="joinAnyDemocratsTime" property="joinAnyDemocratsTime" />
+	    <result column="reviewState" property="reviewState" />
+	    <result column="usable" property="usable" />
+    </resultMap>
+    <select id="findPersonnerMessageByCon" resultMap="personnelMessageList" parameterType="java.util.Map">
+  		select 
+  			personnelID,
+	  		personnelName,
+	  		personnelSex,
+	  		nation,
+	  		nativePlace,
+	  		IDCard,
+	  		birthPlace,
+	  		maritalStatus,
+	  		healthState,
+	  		workUnit,
+	  		departmentCode,
+	  		jobName,
+	  		jobType,
+	  		personnelType,
+	  		onTheJobState,
+	  		entryDate,
+	  		leaveDate,
+	  		politicsStatus,
+	  		startWorkTime,
+	  		fullTimeAcademic,
+	  		fullTimeDegree,
+	  		fullTimeSchool,
+	  		fullTimeMajor,
+	  		inServiceEducationAcademic,
+	  		inServiceEducationDegree,
+	  		inServiceEducationSchool,
+	  		inServiceEducationMajor,
+	  		joinCommunistPartyTime,
+	  		joinLeagueMemberTime,
+	  		joinAnyDemocratsTime,
+	  		reviewState,
+	  		usable 
+	  	
+  		from personnel_message p
+  		<where>
+  			<if test="personnelName != null and personnelName !=''">
+    			p.personnelName = #{personnelName}
+  			</if> 
+  			<if test="IDCard != null and IDCard !=''">
+    			and p.IDCard = #{IDCard}
+  			</if>
+  			<if test="departmentCode != null and departmentCode !=''">
+    			and p.departmentCode = #{departmentCode}
+  			</if>
+  		</where>
+  </select>
+  <insert id="addPersonnerMessage" parameterType="com.haoyun.personnelProject.bean.PersonnelMessageBean">
+  	insert into personnel_message(
+  		personnelID,
+  		personnelName,
+  		personnelSex,
+  		nation,
+  		nativePlace,
+  		IDCard,
+  		birthPlace,
+  		maritalStatus,
+  		healthState,
+  		workUnit,
+  		departmentCode,
+  		jobName,
+  		jobType,
+  		personnelType,
+  		onTheJobState,
+  		entryDate,
+  		leaveDate,
+  		politicsStatus,
+  		startWorkTime,
+  		fullTimeAcademic,
+  		fullTimeDegree,
+  		fullTimeSchool,
+  		fullTimeMajor,
+  		inServiceEducationAcademic,
+  		inServiceEducationDegree,
+  		inServiceEducationSchool,
+  		inServiceEducationMajor,
+  		joinCommunistPartyTime,
+  		joinLeagueMemberTime,
+  		joinAnyDemocratsTime,
+  		reviewState,
+  		usable
+  	) values(
+  		#{id},
+  		#{personnelName},
+  		#{personnelSex},
+  		#{nation},
+  		#{nativePlace},
+  		#{IDCard},
+  		#{birthPlace},
+  		#{maritalStatus},
+  		#{healthState},
+  		#{workUnit},
+  		#{departmentCode},
+  		#{jobName},
+  		#{jobType},
+  		#{personnelType},
+  		#{onTheJobState},
+  		#{entryDate},
+  		#{leaveDate},
+  		#{politicsStatus},
+  		#{startWorkTime},
+  		#{fullTimeAcademic},
+  		#{fullTimeDegree},
+  		#{fullTimeSchool},
+  		#{fullTimeMajor},
+  		#{inServiceEducationAcademic},
+  		#{inServiceEducationDegree},
+  		#{inServiceEducationSchool},
+  		#{inServiceEducationMajor},
+  		#{joinCommunistPartyTime},
+  		#{joinLeagueMemberTime},
+  		#{joinAnyDemocratsTime},
+  		#{reviewState},
+  		#{usable}
+  	)
+  </insert>
+  
+  <update id="updatePersonnelMessage" parameterType="java.util.Map">
+  	update personnel_message
+  	<set>
+  		<if test="onTheJobState != null and onTheJobState !=''">
+    		p.onTheJobState = #{onTheJobState},
+  		</if> 
+  		<if test="reviewState != null and reviewState !=''">
+    		p.reviewState = #{reviewState},
+  		</if> 
+  		<if test="usable != null and usable !=''">
+    		p.usable = #{usable},
+  		</if> 
+  	</set>
+  	<where>
+  		<if test="personnelID != null and personnelID !=''">
+    		p.personnelID = #{personnelID}
+  		</if> 
+  	</where>
+  </update>
+  
+  
+</mapper>
